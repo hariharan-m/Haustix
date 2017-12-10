@@ -6,6 +6,7 @@
 #include <bluetooth/hci.h>
 #include <bluetooth/hci_lib.h>
 
+
 int main(int argc, char **argv)
 {
     inquiry_info *ii = NULL;
@@ -13,7 +14,7 @@ int main(int argc, char **argv)
     int dev_id, sock, len, flags;
     int i;
     char addr[19] = { 0 };
-    char name[248] = { 0 };
+    char msg[248] = { 0 };
 
     dev_id = hci_get_route(NULL);
     sock = hci_open_dev( dev_id );
@@ -32,11 +33,10 @@ int main(int argc, char **argv)
 
     for (i = 0; i < num_rsp; i++) {
         ba2str(&(ii+i)->bdaddr, addr);
-        memset(name, 0, sizeof(name));
-        if (hci_read_remote_name(sock, &(ii+i)->bdaddr, sizeof(name), 
-            name, 0) < 0)
-        strcpy(name, "[unknown]");
-        printf("%s  %s\n", addr, name);
+        memset(msg, 0, sizeof(msg));
+        if (hci_read_remote_name(sock, &(ii+i)->bdaddr, sizeof(msg), msg, 0) < 0)
+        strcpy(msg, "[unknown]");
+        printf("%s  %s\n", addr, msg);
     }
 
     free( ii );

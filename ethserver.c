@@ -7,7 +7,38 @@
 #include <errno.h>
 #include <string.h>
 #include <sys/types.h>
-#include <time.h> 
+
+void process_set(){
+    int i;
+    for(i=2;i<6;i++)
+    {
+        setLed(i-2,eth_in_str[i]);
+    }
+
+}
+
+void setLed(int num,char val)
+{
+//TODO set state too
+}
+
+void readPir()
+{
+    //TODO
+}
+void process_get()
+{
+    readPir();
+    memset(eth_out_str,0,sizeof(eth_out_str));
+    sprintf(eth_out_str, "r,%d,%d,%d,%d,%d\n",state.led[0],state.led[1],state.led[2],state.led[3],state.pir); //r-> reply
+}
+
+struct states {
+   int led[4];
+   int pir;
+   
+} state;
+
 
 int main(int argc, char *argv[])
 {
