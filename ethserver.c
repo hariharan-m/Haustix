@@ -27,6 +27,7 @@ void setLed(int num,char val)
 void readPir()
 {
     //TODO
+    return;
 }
 void process_get()
 {
@@ -75,9 +76,8 @@ int main(int argc, char *argv[])
             eth_in_str[n] = 0;
             printf("Received %s\n",eth_in_str );
         }
-        strcpy(sendBuff,"Reply");
-        write(connfd, sendBuff, strlen(sendBuff)); 
-
+        strcpy(sendBuff,"Reply\r\n");
+        write(connfd, sendBuff, sizeof(sendBuff)); 
         close(connfd);
         sleep(1);
      }
