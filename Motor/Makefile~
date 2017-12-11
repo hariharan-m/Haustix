@@ -1,5 +1,5 @@
 ifneq ($(KERNELRELEASE),)
-	obj-m := mymotion.o
+	obj-m := mygpio.o
 else
 	KERNELDIR := $(EC535)/gumstix/oe/linux-2.6.21
 	PWD := $(shell pwd)

@@ -1,0 +1,1 @@
+cmd_/ad/eng/users/g/v/gvikram/Project/Motion/mymotion.ko := arm-linux-ld -EL  -r -o /ad/eng/users/g/v/gvikram/Project/Motion/mymotion.ko /ad/eng/users/g/v/gvikram/Project/Motion/mymotion.o /ad/eng/users/g/v/gvikram/Project/Motion/mymotion.mod.o
