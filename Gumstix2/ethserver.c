@@ -49,14 +49,10 @@ int main(int argc, char *argv[])
 {
     int listenfd = 0, connfd = 0,n=0;
     struct sockaddr_in serv_addr; 
-
-
-    char sendBuff[1025];
     time_t ticks; 
 
     listenfd = socket(AF_INET, SOCK_STREAM, 0);
     memset(&serv_addr, '0', sizeof(serv_addr));
-    memset(sendBuff, '0', sizeof(sendBuff)); 
 
     serv_addr.sin_family = AF_INET;
     serv_addr.sin_addr.s_addr = htonl(INADDR_ANY);
@@ -69,16 +65,18 @@ int main(int argc, char *argv[])
     while(1)
     {
         connfd = accept(listenfd, (struct sockaddr*)NULL, NULL); 
+        while(1)
+    {
         memset(eth_in_str,0,sizeof(eth_in_str));
         memset(eth_out_str,0,sizeof(eth_out_str));
-        while ( (n = read(connfd, eth_in_str, sizeof(eth_in_str)-1)) > 0)
-        {
-            eth_in_str[n] = 0;
-            printf("Received %s\n",eth_in_str );
-        }
-        strcpy(sendBuff,"Reply\r\n");
-        write(connfd, sendBuff, sizeof(sendBuff)); 
-        close(connfd);
+        read(connfd, eth_in_str, sizeof(eth_in_str));
+        
+        //    eth_in_str[n] = 0;
+       printf("Received %s\n",eth_in_str );
+       strcpy(eth_out_str,"Reply\r\n");
+       write(connfd , eth_in_str , sizeof(eth_in_str));
+       //close(connfd);
         sleep(1);
      }
+    }
 }

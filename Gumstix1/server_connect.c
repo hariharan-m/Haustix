@@ -56,12 +56,11 @@ void ethernet_get()
         puts("Send failed");
         return ;
     }
-    memset(eth_in_str,0,sizeof(bt_out_str));
-    while ( (n = read(ethsocket, eth_in_str, sizeof(eth_in_str)-1)) > 0)
-    {
-        eth_in_str[n] = 0;
+    memset(eth_in_str,0,sizeof(eth_in_str));
+        n = read(ethsocket, eth_in_str, sizeof(eth_in_str));
+        printf("n is %d\n", n);
         printf("%s\n",eth_in_str );
-    }
+
 
 }
 
@@ -200,6 +199,7 @@ while(1){  //Will re-enter when disconnected
         {
             bt_in_str[bytes_read]=0;
             printf("received [%s]\n", bt_in_str);
+            send(btclient, bt_in_str, sizeof(bt_in_str),0);
             if(bt_in_str[0]=='g')
                 process_get(bt_in_str);
             else if(bt_in_str[0]=='s')
@@ -213,4 +213,5 @@ while(1){  //Will re-enter when disconnected
     close(btsocket);
     return 0;
 }
+
 
