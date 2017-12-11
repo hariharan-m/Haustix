@@ -8,14 +8,16 @@
 #include <string.h>
 #include <sys/types.h>
 
-void process_set(){
-    int i;
-    for(i=2;i<6;i++)
-    {
-        setLed(i-2,eth_in_str[i]);
-    }
+char eth_in_str[1024];
+char eth_out_str[1024];
 
-}
+
+struct states {
+   int led[4];
+   int pir;
+   
+} state;
+
 
 void setLed(int num,char val)
 {
@@ -33,17 +35,20 @@ void process_get()
     sprintf(eth_out_str, "r,%d,%d,%d,%d,%d\n",state.led[0],state.led[1],state.led[2],state.led[3],state.pir); //r-> reply
 }
 
-struct states {
-   int led[4];
-   int pir;
-   
-} state;
 
+void process_set(){
+    int i;
+    for(i=2;i<6;i++)
+    {
+        setLed(i-2,eth_in_str[i]);
+    }
 
+}
 int main(int argc, char *argv[])
 {
-    int listenfd = 0, connfd = 0;
+    int listenfd = 0, connfd = 0,n=0;
     struct sockaddr_in serv_addr; 
+
 
     char sendBuff[1025];
     time_t ticks; 
@@ -63,9 +68,14 @@ int main(int argc, char *argv[])
     while(1)
     {
         connfd = accept(listenfd, (struct sockaddr*)NULL, NULL); 
-
-        ticks = time(NULL);
-        snprintf(sendBuff, sizeof(sendBuff), "%.24s\r\n", ctime(&ticks));
+        memset(eth_in_str,0,sizeof(eth_in_str));
+        memset(eth_out_str,0,sizeof(eth_out_str));
+        while ( (n = read(connfd, eth_in_str, sizeof(eth_in_str)-1)) > 0)
+        {
+            eth_in_str[n] = 0;
+            printf("Received %s\n",eth_in_str );
+        }
+        strcpy(sendBuff,"Reply");
         write(connfd, sendBuff, strlen(sendBuff)); 
 
         close(connfd);
