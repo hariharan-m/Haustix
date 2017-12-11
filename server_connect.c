@@ -89,6 +89,7 @@ int main(int argc, char **argv)
         printf("\n Error : Could not create socket \n");
         return 1;
     }
+    memset(&serv_addr, '0', sizeof(serv_addr)); 
     serv_addr.sin_family = AF_INET;
     serv_addr.sin_port = htons(5000); 
 
@@ -97,7 +98,7 @@ int main(int argc, char **argv)
         printf("\n inet_pton error occured\n");
         return 1;
     }
-    memset(&serv_addr, '0', sizeof(serv_addr)); 
+    
     // BT INIT
     btsocket = socket(AF_BLUETOOTH, SOCK_STREAM, BTPROTO_RFCOMM);
 
