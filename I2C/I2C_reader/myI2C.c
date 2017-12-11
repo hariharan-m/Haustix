@@ -30,89 +30,30 @@ MODULE_LICENSE("Dual BSD/GPL");
 MODULE_DESCRIPTION("I2C testing");
 MODULE_AUTHOR("Vikram, Hariharan M ");
 
+static char *value; 
 
-void setDirs(void);
-void setGpio(void);
-int count_handler(unsigned long);
 /* Major number */
 static int mygpio_major = 61;
-static unsigned PIR = 31;
-//static int catflag = 0;
-static unsigned led[2] = {29,30};
-static struct timer_list * count_timer;
-static int human_detect = 0;
 /* Declaration of memory.c functions */
 static int mygpio_open(struct inode *inode, struct file *filp);
 static int mygpio_release(struct inode *inode, struct file *filp);
 static ssize_t mygpio_read(struct file *filp,
 		char *buf, size_t count, loff_t *f_pos);
-//static ssize_t mygpio_write(struct file *filp,
-//		const char *buf, size_t count, loff_t *f_pos);
+static ssize_t mygpio_write(struct file *filp,
+		const char *buf, size_t count, loff_t *f_pos);
 
 struct file_operations mygpio_fops = {
 	read: mygpio_read,
-	//write: mygpio_write,
+	write: mygpio_write,
 	open: mygpio_open,
 	release: mygpio_release
 };
-void setGpio(void)
-{
-    //setting checking PIRs 
-    //enabling the LED On an=d OFF
-    if (human_detect == 1)
-    {
-        gpio_set_value(led[0],1);
-        gpio_set_value(led[1],1);
-    }
-    else
-    {
-        gpio_set_value(led[0],0);
-        gpio_set_value(led[1],0);
-    }
-}
-
-
-void setDirs(void)
-{
-	//output led direction
-    gpio_direction_output(led[0],0);
-	gpio_direction_output(led[1],0);
-}
-irqreturn_t gpio_irq_pir(int irq, void *dev_id, struct pt_regs *regs)
-{
-	
-    if(human_detect == 1){
-        human_detect = 0;
-        }
-    else{
-        human_detect = 1;
-        }
-   // setGpio();
-	printk("Button IRQ PIR Sensor\n");
-	return IRQ_HANDLED;
-}
-
-int count_handler(unsigned long data) {
-
-		//mod_timer(count_timer, jiffies + msecs_to_jiffies(speeds[slevel]));	
-		printk("Handler\n");
-        pxa_gpio_mode(PIR | GPIO_IN);
-	    int irq_pir = IRQ_GPIO(PIR);
-	    if (request_irq(irq_pir, &gpio_irq_pir, SA_INTERRUPT | SA_TRIGGER_RISING,"mygpio", NULL) != 0 ) {
-                printk ( "irq run not acquired \n" );
-                return -1;
-        }else{
-                printk ( "irq %d acquired successfully \n", irq_pir );
-	}
-        del_timer(count_timer);
-}
-
-
 
 static int my_init_module(void)
 {
     int result;
-	printk("Hello world!\n");	
+    int ret = 0;
+	printk("Hello I2C world!\n");	
 	/* Registering device */
 	result = register_chrdev(mygpio_major, "mygpio", &mygpio_fops);
 	if (result < 0)
@@ -121,36 +62,36 @@ static int my_init_module(void)
 			"mygpio: cannot obtain major number %d\n", mygpio_major);
 		return result;
 	}
-	count_timer = (struct timer_list *) kmalloc(sizeof(struct timer_list), GFP_KERNEL);
-    setup_timer(count_timer, count_handler, 0);
-	mod_timer(count_timer, jiffies + msecs_to_jiffies(5000));
-    //setting PIR as an interrupt	
     
-	//setDirs();
-	//setGpio();
-    
+    value = (char *)kmalloc( sizeof(char)*10,GFP_KERNEL);
+    if (!value) {
+      ret = -ENOMEM;
+    } 
+    else {
+    memset( value, 0,sizeof(char)*10 );
 	return 0;
+}
 }
 
 static void my_cleanup_module(void)
 {
-	
-	free_irq(IRQ_GPIO(PIR), NULL);
-	//if(count_timer)
-	//del_timer(count_timer);
 	unregister_chrdev(mygpio_major, "mygpio");
-	printk("Bye world!\n");
+    kfree(value);
+	printk("Bye I2C world!\n");
 }
-/*
+
 static ssize_t mygpio_write(struct file *filp, const char *buf,
 							size_t count, loff_t *f_pos)
 {
-	char *name=(char *) kmalloc((size_t)1200,GFP_KERNEL);
-	memset(name,0,sizeof(name));
-	return count;
+	  if (copy_from_user( value, buf, count )) {
+    return -EFAULT;
+  }
+
+
+return count;
 
 }
-*/
+
 
 static ssize_t mygpio_read(struct file *filp, char *buf, 
 							size_t count, loff_t *f_pos)
@@ -159,7 +100,7 @@ static ssize_t mygpio_read(struct file *filp, char *buf,
     int outcount=0; int ret;
 	memset(output_buffer,0,(size_t)1024);
 
-	outcount=sprintf(output_buffer,"%d\n",human_detect);
+	outcount=sprintf(output_buffer,"%s\n",value);
 	ret = copy_to_user(buf, output_buffer , outcount);
 	if (ret)
 	{
@@ -171,16 +112,12 @@ static ssize_t mygpio_read(struct file *filp, char *buf,
 static int mygpio_open(struct inode *inode, struct file *filp)
 {
 
-	/* Success */
-	//catflag=0;
 	return 0;
 }
 
 static int mygpio_release(struct inode *inode, struct file *filp)
 {
 
-	/* Success */
-	//catflag=0;
 	return 0;
 }
 
