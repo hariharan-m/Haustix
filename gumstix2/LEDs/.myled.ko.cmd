@@ -1,0 +1,1 @@
+cmd_/ad/eng/users/g/v/gvikram/Project/gumstix2/LEDs/myled.ko := arm-linux-ld -EL  -r -o /ad/eng/users/g/v/gvikram/Project/gumstix2/LEDs/myled.ko /ad/eng/users/g/v/gvikram/Project/gumstix2/LEDs/myled.o /ad/eng/users/g/v/gvikram/Project/gumstix2/LEDs/myled.mod.o

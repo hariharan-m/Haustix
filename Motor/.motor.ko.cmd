@@ -1,1 +1,0 @@
-cmd_/ad/eng/users/g/v/gvikram/Project/Motor/motor.ko := arm-linux-ld -EL  -r -o /ad/eng/users/g/v/gvikram/Project/Motor/motor.ko /ad/eng/users/g/v/gvikram/Project/Motor/motor.o /ad/eng/users/g/v/gvikram/Project/Motor/motor.mod.o
