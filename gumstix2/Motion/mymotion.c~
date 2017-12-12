@@ -27,7 +27,7 @@ void setGpio(void);
 void count_handler(unsigned long);
 /* Major number */
 static int mygpio_major = 61;
-static unsigned PIR = 31;
+static unsigned PIR = 28;
 //static int catflag = 0;
 static unsigned led[2] = {29,30};
 static struct timer_list * count_timer;
