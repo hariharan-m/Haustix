@@ -10,6 +10,7 @@
 #include <sys/socket.h>
 #include <sys/types.h>
 #include <unistd.h>
+#include <fcntl.h>
 
 static char bt_out_str[1024];
 static char bt_in_str[1024];
@@ -22,30 +23,71 @@ static struct sockaddr_in serv_addr;
 
 int readpir()
 {
-    return 0;
+    int pFile;
+    char line[2];    
+	pFile = open("/dev/mymotion", O_RDWR);
+    memset(line,0,sizeof(line));
+	if (pFile < 0) {
+		fputs("mymotion not found\n",stderr);
+		return 1;
+	}
+	read(pFile,line,sizeof(line));
+    if(line[0] == '1'){
+        close(pFile);
+        return 1;
+        }
+    else if (line[0] == '0'){
+    close(pFile);
+    return 0;    
+    }
 }
+
 int readservo()
 {
     return 0;
 }
 int readldr()
 {
-    return 0;
+    int pFile;
+    char line[10];    
+	pFile = open("/dev/myI2C", O_RDWR);
+    memset(line,0,sizeof(line));
+	if (pFile < 0) {
+		fputs("myI2C not found\n",stderr);
+		return 1;
+	}
+	read(pFile,line,sizeof(line));
+    int _value = atoi(line);    
+    close(pFile);
+    return _value;    
 }
 
-void setLed()
+void setLed(char s)
 {
-
+    int pFile;
+    char line[2];    
+	pFile = open("/dev/myled", O_RDWR);
+    memset(line,0,sizeof(line));
+	if (pFile < 0) {
+		fputs("myled not found\n",stderr);
+		return 1;
+	}
+    line[0] = s;
+    line[1] = '\0';
+ 	write(pFile,line,sizeof(line));
+    close(pFile);
 }
+
 void setServo()
 {
-
+    printf("Set servo\n");
 }
 
 void setAuto()
 {
-    
+    printf("Write to servo\n");
 }
+
 void ethernet_get()
 {
     int n=0;

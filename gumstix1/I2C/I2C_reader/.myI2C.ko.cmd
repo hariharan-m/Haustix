@@ -1,1 +1,1 @@
-cmd_/ad/eng/users/g/v/gvikram/Project/I2C/I2C_reader/myI2C.ko := arm-linux-ld -EL  -r -o /ad/eng/users/g/v/gvikram/Project/I2C/I2C_reader/myI2C.ko /ad/eng/users/g/v/gvikram/Project/I2C/I2C_reader/myI2C.o /ad/eng/users/g/v/gvikram/Project/I2C/I2C_reader/myI2C.mod.o
+cmd_/ad/eng/users/g/v/gvikram/Haustix/gumstix1/I2C/I2C_reader/myI2C.ko := arm-linux-ld -EL  -r -o /ad/eng/users/g/v/gvikram/Haustix/gumstix1/I2C/I2C_reader/myI2C.ko /ad/eng/users/g/v/gvikram/Haustix/gumstix1/I2C/I2C_reader/myI2C.o /ad/eng/users/g/v/gvikram/Haustix/gumstix1/I2C/I2C_reader/myI2C.mod.o

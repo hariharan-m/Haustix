@@ -1,5 +1,5 @@
 ifneq ($(KERNELRELEASE),)
-	obj-m := motor.o
+	obj-m := mymotor.o
 else
 	KERNELDIR := $(EC535)/gumstix/oe/linux-2.6.21
 	PWD := $(shell pwd)

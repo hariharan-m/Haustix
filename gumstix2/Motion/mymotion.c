@@ -24,7 +24,7 @@
 #include <asm-arm/arch/hardware.h>
 void setDirs(void);
 void setGpio(void);
-int count_handler(unsigned long);
+void count_handler(unsigned long);
 /* Major number */
 static int mygpio_major = 61;
 static unsigned PIR = 31;
@@ -83,7 +83,7 @@ irqreturn_t gpio_irq_pir(int irq, void *dev_id, struct pt_regs *regs)
 	return IRQ_HANDLED;
 }
 
-int count_handler(unsigned long data) {
+void count_handler(unsigned long data) {
 
 		//mod_timer(count_timer, jiffies + msecs_to_jiffies(speeds[slevel]));	
 		printk("Handler\n");
@@ -91,11 +91,12 @@ int count_handler(unsigned long data) {
 	    int irq_pir = IRQ_GPIO(PIR);
 	    if (request_irq(irq_pir, &gpio_irq_pir, SA_INTERRUPT | SA_TRIGGER_RISING,"mymotion", NULL) != 0 ) {
                 printk ( "irq run not acquired \n" );
-                return -1;
+                return ;
         }else{
                 printk ( "irq %d acquired successfully \n", irq_pir );
 	}
         del_timer(count_timer);
+
 }
 
 

@@ -59,7 +59,7 @@ static int my_init_module(void)
 	if (result < 0)
 	{
 		printk(KERN_ALERT
-			"mygpio: cannot obtain major number %d\n", mygpio_major);
+			"myI2C: cannot obtain major number %d\n", mygpio_major);
 		return result;
 	}
     
@@ -71,7 +71,7 @@ static int my_init_module(void)
     memset( value, 0,sizeof(char)*10 );
 	
 }
-    return 0;
+    return 0;   
 }
 
 static void my_cleanup_module(void)

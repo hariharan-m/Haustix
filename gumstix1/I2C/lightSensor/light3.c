@@ -48,14 +48,14 @@ int main()
 		exit(1);
 	}
     pFile1 = open("/dev/myI2C", O_RDWR);
-    pFile2 = open("/dev/myled", O_RDWR);
+    pFile2 = open("/dev/motor", O_RDWR);
     if (pFile1 < 0) {
-		fputs("File not found\n",stderr);
+		fputs("myI2C not found\n",stderr);
 		return 1;
 	}
 
     if (pFile2 < 0) {
-		fputs("File not found\n",stderr);
+		fputs("motor not found\n",stderr);
 		return 1;
 	}
 	if (ioctl(file,I2C_SLAVE_FORCE,addr) < 0)
@@ -108,14 +108,12 @@ int main()
 			avgLux = 100;
         
 		sprintf(str,"%d",avgLux);
-		write(str,1,sizeof(str),pFile1);
-        
+		write(pFile1,str,sizeof(str));
         
         if(avgLux<=100)
         {
 		    sprintf(led_val,"%d",1);
-		    write(str,1,sizeof(led_val),pFile2);
-            
+		    write(pFile2,led_val,sizeof(led_val));
         }
         printf("value is %d \r\n",avgLux);	
         }

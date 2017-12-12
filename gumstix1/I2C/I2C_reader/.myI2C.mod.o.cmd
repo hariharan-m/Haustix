@@ -1,7 +1,7 @@
-cmd_/ad/eng/users/g/v/gvikram/Project/I2C/I2C_reader/myI2C.mod.o := arm-linux-gcc -Wp,-MD,/ad/eng/users/g/v/gvikram/Project/I2C/I2C_reader/.myI2C.mod.o.d  -nostdinc -isystem /ad/eng/courses/ec/ec535/gumstix/oe/cross/bin/../lib/gcc/arm-angstrom-linux-gnueabi/4.1.2/include -D__KERNEL__ -Iinclude  -include include/linux/autoconf.h -mlittle-endian -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -Os -marm -fno-omit-frame-pointer -mapcs -mno-sched-prolog -mabi=aapcs-linux -mno-thumb-interwork -D__LINUX_ARM_ARCH__=5 -march=armv5te -mtune=xscale -Wa,-mcpu=xscale  -msoft-float -Uarm -fno-omit-frame-pointer -fno-optimize-sibling-calls  -fno-stack-protector -Wdeclaration-after-statement -Wno-pointer-sign    -D"KBUILD_STR(s)=\#s" -D"KBUILD_BASENAME=KBUILD_STR(myI2C.mod)"  -D"KBUILD_MODNAME=KBUILD_STR(myI2C)" -DMODULE -c -o /ad/eng/users/g/v/gvikram/Project/I2C/I2C_reader/myI2C.mod.o /ad/eng/users/g/v/gvikram/Project/I2C/I2C_reader/myI2C.mod.c
+cmd_/ad/eng/users/g/v/gvikram/Haustix/gumstix1/I2C/I2C_reader/myI2C.mod.o := arm-linux-gcc -Wp,-MD,/ad/eng/users/g/v/gvikram/Haustix/gumstix1/I2C/I2C_reader/.myI2C.mod.o.d  -nostdinc -isystem /ad/eng/courses/ec/ec535/gumstix/oe/cross/bin/../lib/gcc/arm-angstrom-linux-gnueabi/4.1.2/include -D__KERNEL__ -Iinclude  -include include/linux/autoconf.h -mlittle-endian -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -Os -marm -fno-omit-frame-pointer -mapcs -mno-sched-prolog -mabi=aapcs-linux -mno-thumb-interwork -D__LINUX_ARM_ARCH__=5 -march=armv5te -mtune=xscale -Wa,-mcpu=xscale  -msoft-float -Uarm -fno-omit-frame-pointer -fno-optimize-sibling-calls  -fno-stack-protector -Wdeclaration-after-statement -Wno-pointer-sign    -D"KBUILD_STR(s)=\#s" -D"KBUILD_BASENAME=KBUILD_STR(myI2C.mod)"  -D"KBUILD_MODNAME=KBUILD_STR(myI2C)" -DMODULE -c -o /ad/eng/users/g/v/gvikram/Haustix/gumstix1/I2C/I2C_reader/myI2C.mod.o /ad/eng/users/g/v/gvikram/Haustix/gumstix1/I2C/I2C_reader/myI2C.mod.c
 
-deps_/ad/eng/users/g/v/gvikram/Project/I2C/I2C_reader/myI2C.mod.o := \
-  /ad/eng/users/g/v/gvikram/Project/I2C/I2C_reader/myI2C.mod.c \
+deps_/ad/eng/users/g/v/gvikram/Haustix/gumstix1/I2C/I2C_reader/myI2C.mod.o := \
+  /ad/eng/users/g/v/gvikram/Haustix/gumstix1/I2C/I2C_reader/myI2C.mod.c \
     $(wildcard include/config/module/unload.h) \
   include/linux/module.h \
     $(wildcard include/config/modules.h) \
@@ -220,6 +220,6 @@ deps_/ad/eng/users/g/v/gvikram/Project/I2C/I2C_reader/myI2C.mod.o := \
   include/linux/vermagic.h \
   include/linux/utsrelease.h \
 
-/ad/eng/users/g/v/gvikram/Project/I2C/I2C_reader/myI2C.mod.o: $(deps_/ad/eng/users/g/v/gvikram/Project/I2C/I2C_reader/myI2C.mod.o)
+/ad/eng/users/g/v/gvikram/Haustix/gumstix1/I2C/I2C_reader/myI2C.mod.o: $(deps_/ad/eng/users/g/v/gvikram/Haustix/gumstix1/I2C/I2C_reader/myI2C.mod.o)
 
-$(deps_/ad/eng/users/g/v/gvikram/Project/I2C/I2C_reader/myI2C.mod.o):
+$(deps_/ad/eng/users/g/v/gvikram/Haustix/gumstix1/I2C/I2C_reader/myI2C.mod.o):
