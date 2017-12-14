@@ -28,7 +28,7 @@
  ************************************/
 MODULE_LICENSE("Dual BSD/GPL");
 MODULE_DESCRIPTION("I2C testing");
-MODULE_AUTHOR("Vikram, Hariharan M ");
+MODULE_AUTHOR("Vikram V, Hariharan M ");
 
 static char *value; 
 

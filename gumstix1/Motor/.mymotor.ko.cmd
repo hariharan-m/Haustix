@@ -1,1 +1,0 @@
-cmd_/ad/eng/users/g/v/gvikram/Haustix/gumstix1/Motor/mymotor.ko := arm-linux-ld -EL  -r -o /ad/eng/users/g/v/gvikram/Haustix/gumstix1/Motor/mymotor.ko /ad/eng/users/g/v/gvikram/Haustix/gumstix1/Motor/mymotor.o /ad/eng/users/g/v/gvikram/Haustix/gumstix1/Motor/mymotor.mod.o
